@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3001
+const port = process.env.PORT || 3000
 const axios = require('axios');
 const circuitBreaker = require('opossum');
 
@@ -11,7 +11,7 @@ const circuitBreakerOptions = {
     fallback: () => 'Service unavailable. Please try again later.'
 };
 
-const apiCall = () => axios.get('smartree-api.azurewebsites.net/api/dashboard');
+const apiCall = () => axios.get('https://smartree-api.azurewebsites.net:443/api/dashboard');
 
 const circuitBreakerInstance = new circuitBreaker(apiCall, circuitBreakerOptions);
 
