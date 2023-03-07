@@ -15,7 +15,7 @@ const apiCall = () => axios.get('https://smartree-api.azurewebsites.net:443/api/
 
 const circuitBreakerInstance = new circuitBreaker(apiCall, circuitBreakerOptions);
 
-app.get('/api/circuit', async (req, res) => {
+app.get('/api/src', async (req, res) => {
     try {
         const responseBody = await circuitBreakerInstance.fire();
         res.json(responseBody.data);
@@ -23,6 +23,12 @@ app.get('/api/circuit', async (req, res) => {
         res.json(error.message);
     }    
 });
+
+app.get('/api/circuit-breaker', (req, res) => {
+    const status = circuitBreakerInstance.toJSON()
+    res.json(status);
+});
+  
 
 app.listen( port, () => {
   console.log(`Server running on port ${port}`);
