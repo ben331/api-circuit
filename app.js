@@ -50,8 +50,12 @@ app.get('/api/circuit-breaker', (req, res) => {
     const status = circuitBreakerInstance.toJSON()
     res.json(status);
 });
-  
 
+app.get('/api/circuit-breaker-slow', (req, res) => {
+    const status = circuitBreakerSlow.toJSON()
+    res.json(status);
+});
+  
 app.listen( port, () => {
   console.log(`Server running on port ${port}`);
 });
